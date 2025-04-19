@@ -13,6 +13,8 @@ export default function LoginWithUsername() {
     password: "",
   });
 
+  const BASE_URL = import.meta.env.VITE_API_BASE_URL
+  console.log(BASE_URL)
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
@@ -21,7 +23,7 @@ export default function LoginWithUsername() {
     e.preventDefault();
 
     try {
-      const res = await fetch('/api/v1/users/login', {
+      const res = await fetch(`${BASE_URL}/api/v1/users/login`, {
         method: 'POST',
         headers: {
           "Content-type": 'application/json'
