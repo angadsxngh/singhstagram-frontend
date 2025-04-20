@@ -26,7 +26,7 @@ export default function DeleteAccount() {
       alert("Passwords do not match!");
       return;
     }
-    const BASE_URL = process.env.BASE_URL
+    const BASE_URL = import.meta.env.VITE_API_BASE_URL
     console.log(BASE_URL)
 
     try {

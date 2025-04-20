@@ -4,7 +4,7 @@ import { Trash2 } from "lucide-react"; // Importing Trash Can Icon
 import { useUser } from "../../context/UserContext"; 
 import ToasterUi from 'toaster-ui'
 export default function Signup() {
-  const BASE_URL = process.env.BASE_URL
+  const BASE_URL = import.meta.env.VITE_API_BASE_URL
   const toaster = new ToasterUi()
   const { setUser } = useUser()
   const navigate = useNavigate()

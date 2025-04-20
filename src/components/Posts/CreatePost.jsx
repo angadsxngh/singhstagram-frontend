@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useUser } from "../../context/UserContext.jsx";
 
 export default function CreatePost() {
-  const BASE_URL = process.env.BASE_URL
+  const BASE_URL = import.meta.env.VITE_API_BASE_URL
   const { user } = useUser();
   const navigate = useNavigate();
   const [media, setMedia] = useState(null);

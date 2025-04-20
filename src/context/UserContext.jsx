@@ -3,7 +3,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
-    const BASE_URL = process.env.BASE_URL
+    const BASE_URL = import.meta.env.VITE_API_BASE_URL
     const [user, setUser] = useState(() => {
         const storedUser = localStorage.getItem("user");
         return storedUser ? JSON.parse(storedUser) : null;

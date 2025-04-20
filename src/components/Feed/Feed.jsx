@@ -3,7 +3,7 @@ import { FaHeart } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
 const Feed = () => {
-  const BASE_URL = process.env.BASE_URL
+  const BASE_URL = import.meta.env.VITE_API_BASE_URL
   const navigate = useNavigate();
   const defaultAvatar =
     "https://cdn-icons-png.flaticon.com/512/3177/3177440.png";

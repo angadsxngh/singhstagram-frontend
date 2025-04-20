@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function UpdatePassword() {
-  const BASE_URL = process.env.BASE_URL
+  const BASE_URL = import.meta.env.VITE_API_BASE_URL
   const navigate = useNavigate();
   const [form, setForm] = useState({
     oldPassword: "",

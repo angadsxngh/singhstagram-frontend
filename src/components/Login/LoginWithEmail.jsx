@@ -17,7 +17,7 @@ export default function LoginWithEmail() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const BASE_URL = process.env.BASE_URL
+  const BASE_URL = import.meta.env.VITE_API_BASE_URL
 
   const handleSubmit = async (e) => {
     e.preventDefault();

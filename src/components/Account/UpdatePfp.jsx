@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 const defaultAvatar = "https://cdn-icons-png.flaticon.com/512/3177/3177440.png"; // Default avatar
 
 export default function UpdatePfp() {
-  const BASE_URL = process.env.BASE_URL
+  const BASE_URL = import.meta.env.VITE_API_BASE_URL
   const navigate = useNavigate();
   const [image, setImage] = useState(null);
   const [preview, setPreview] = useState(defaultAvatar);

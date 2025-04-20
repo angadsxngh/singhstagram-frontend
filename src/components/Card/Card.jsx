@@ -4,7 +4,7 @@ import { useUser } from "../../context/UserContext.jsx";
 import { useNavigate, useLocation } from "react-router-dom";
 
 export default function Card() {
-  const BASE_URL = process.env.BASE_URL
+  const BASE_URL = import.meta.env.VITE_API_BASE_URL
   const navigate = useNavigate();
   const usePost = location.state || { likes: [], comments: [], mediaUrl: "", caption: "" };
   const { user } = useUser();
