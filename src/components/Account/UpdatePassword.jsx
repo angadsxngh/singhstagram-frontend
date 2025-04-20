@@ -38,6 +38,7 @@ export default function UpdatePassword() {
           "Content-type": "application/json",
         },
         body: JSON.stringify(form),
+        credentials: 'include'
       });
 
       if (response) {

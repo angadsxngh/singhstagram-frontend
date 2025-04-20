@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 
 export default function Profile() {
+  const BASE_URL = import.meta.env.VITE_API_BASE_URL
   const defaultAvatar = "https://cdn-icons-png.flaticon.com/512/3177/3177440.png";
   const params = useParams();
   const { user } = useUser();
@@ -17,10 +18,12 @@ export default function Profile() {
   const navigate = useNavigate()
 
   const handleClick = async () => {
+    const BASE_URL = import.meta.env.VITE_API_BASE_URL
     console.log("button clicked");
 
-    const response = await fetch(`/api/v1/users/follow/${params.userid}`, {
+    const response = await fetch(`${BASE_URL}/api/v1/users/follow/${params.userid}`, {
       method: "POST",
+      credentials: 'include'
     });
 
     console.log(response);
@@ -42,11 +45,12 @@ export default function Profile() {
 
     async function fetchUser() {
       try {
-        const response = await fetch(`/api/v1/users/profile/${params.userid}`, {
+        const response = await fetch(`${BASE_URL}/api/v1/users/profile/${params.userid}`, {
           method: "GET",
           headers: {
             "Content-type": "application/json",
           },
+          credentials: 'include'
         });
 
         console.log(response);

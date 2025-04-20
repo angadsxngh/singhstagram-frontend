@@ -4,16 +4,17 @@ import { useUser } from "../../context/UserContext.jsx";
 import { useNavigate, useLocation } from "react-router-dom";
 
 export default function Card() {
-  const BASE_URL = import.meta.env.VITE_API_BASE_URL
   const navigate = useNavigate();
-  const usePost = location.state || { likes: [], comments: [], mediaUrl: "", caption: "" };
+  const location = useLocation()
+  
+  const BASE_URL = import.meta.env.VITE_API_BASE_URL
   const { user } = useUser();
-  const [showComments, setShowComments] = useState(false);
+  const usePost = location.state || { likes: [], comments: [], mediaUrl: "", caption: "" };
   const isOwner = user?.id === usePost.authorId;
+  
   const [post, setPost] = useState(usePost || { authorId: "", likes: [] });
+  const [showComments, setShowComments] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
-  const [showDialog, setShowDialog] = useState(false);
-  const [commentText, setCommentText] = useState("");
 
   const handleLike = async () => {
     const response = await fetch(`${BASE_URL}/api/v1/users/likePost`, {
@@ -36,6 +37,7 @@ export default function Card() {
       method: "DELETE",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify({ postid: usePost.id }),
+      credentials: 'include'
     });
 
     if (response.ok) {

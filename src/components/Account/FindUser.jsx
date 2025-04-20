@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function FindUser() {
+  const BASE_URL = import.meta.env.VITE_API_BASE_URL
   const defaultAvatar = "https://cdn-icons-png.flaticon.com/512/3177/3177440.png";
   const [query, setQuery] = useState("");
   const [users, setUsers] = useState([]);
@@ -28,10 +29,11 @@ export default function FindUser() {
       setUsers([...[]]);
 
       const response = await fetch(
-        `/api/v1/users/search?query=${encodeURIComponent(query)}`,
+        `${BASE_URL}/api/v1/users/search?query=${encodeURIComponent(query)}`,
         {
           method: "GET",
           headers: { "Content-Type": "application/json" },
+          credentials: 'include'
         }
       );
       console.log(response)

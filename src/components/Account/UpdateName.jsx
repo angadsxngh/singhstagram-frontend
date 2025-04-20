@@ -29,6 +29,7 @@ export default function UpdateName() {
           "Content-type": "application/json",
         },
         body: JSON.stringify(form),
+        credentials: 'include'
       });
 
       if (response) {

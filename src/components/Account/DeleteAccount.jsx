@@ -35,6 +35,7 @@ export default function DeleteAccount() {
         headers: {
           "Content-type": "application/json",
         },
+        credentials: 'include',
         body: JSON.stringify(form),
       });
       const confirmDelete = window.confirm(

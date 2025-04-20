@@ -38,6 +38,7 @@ export default function UpdatePfp() {
       await fetch(`${BASE_URL}/api/v1/users/update-pfp`, {
         method: "POST",
         body: formData,
+        credentials: 'include'
       });
       navigate("/Account");
     } catch (error) {
