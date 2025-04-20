@@ -34,7 +34,6 @@ export const UserProvider = ({ children }) => {
                 localStorage.setItem("user", JSON.stringify(res.user));
             }
         } catch (error) {
-            console.error("Error fetching user:", error);
             setUser(null);
             localStorage.removeItem("user");
         } finally {
@@ -57,7 +56,6 @@ export const UserProvider = ({ children }) => {
             const res = await response.json();
             setPosts(res || []);
         } catch (error) {
-            console.error("Error fetching posts:", error);
             setPosts([]);
         } finally {
             setGlobalLoading(false); 
@@ -80,7 +78,6 @@ export const UserProvider = ({ children }) => {
             setUser(null);
             localStorage.removeItem("user");
         } catch (error) {
-            console.error("Error logging out:", error);
         } finally {
             setGlobalLoading(false); 
         }
