@@ -3,6 +3,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
+    const BASE_URL = process.env.BASE_URL
     const [user, setUser] = useState(() => {
         const storedUser = localStorage.getItem("user");
         return storedUser ? JSON.parse(storedUser) : null;
@@ -18,7 +19,7 @@ export const UserProvider = ({ children }) => {
     const fetchUser = async () => {
         setGlobalLoading(true);  
         try {
-            const response = await fetch('/api/v1/users/get-user', {
+            const response = await fetch(`${BASE_URL}/api/v1/users/get-user`, {
                 method: "GET",
                 credentials: "include"
             });
@@ -44,7 +45,7 @@ export const UserProvider = ({ children }) => {
     const fetchPosts = async () => {
         setGlobalLoading(true);  
         try {
-            const response = await fetch("/api/v1/users/get-posts", {
+            const response = await fetch(`${BASE_URL}/api/v1/users/get-posts`, {
                 method: "GET",
                 credentials: "include"
             });
@@ -71,7 +72,7 @@ export const UserProvider = ({ children }) => {
     const logout = async () => {
         setGlobalLoading(true); 
         try {
-            await fetch("/api/v1/users/logout", {
+            await fetch(`${BASE_URL}/api/v1/users/logout`, {
                 method: "POST",
                 credentials: "include"
             });

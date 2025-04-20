@@ -26,9 +26,11 @@ export default function DeleteAccount() {
       alert("Passwords do not match!");
       return;
     }
+    const BASE_URL = process.env.BASE_URL
+    console.log(BASE_URL)
 
     try {
-      const response = await fetch("/api/v1/users/delete-account", {
+      const response = await fetch(`${BASE_URL}/api/v1/users/delete-account`, {
         method: "POST",
         headers: {
           "Content-type": "application/json",

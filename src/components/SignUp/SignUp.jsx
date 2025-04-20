@@ -4,7 +4,7 @@ import { Trash2 } from "lucide-react"; // Importing Trash Can Icon
 import { useUser } from "../../context/UserContext"; 
 import ToasterUi from 'toaster-ui'
 export default function Signup() {
-
+  const BASE_URL = process.env.BASE_URL
   const toaster = new ToasterUi()
   const { setUser } = useUser()
   const navigate = useNavigate()
@@ -54,7 +54,7 @@ export default function Signup() {
     formData.append("pfp", form.pfp);
 
     try {
-      const response = await fetch("/api/v1/users/register", {
+      const response = await fetch(`${BASE_URL}/api/v1/users/register`, {
         method: "POST",
         body: formData,
         credentials: "include"

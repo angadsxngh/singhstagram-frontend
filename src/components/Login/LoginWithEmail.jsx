@@ -17,10 +17,12 @@ export default function LoginWithEmail() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
+  const BASE_URL = process.env.BASE_URL
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch("/api/v1/users/login", {
+      const res = await fetch(`${BASE_URL}/api/v1/users/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

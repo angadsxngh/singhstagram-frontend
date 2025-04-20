@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function UpdatePassword() {
+  const BASE_URL = process.env.BASE_URL
   const navigate = useNavigate();
   const [form, setForm] = useState({
     oldPassword: "",
@@ -31,7 +32,7 @@ export default function UpdatePassword() {
     }
 
     try {
-      const response = await fetch("/api/v1/users/change-password", {
+      const response = await fetch(`${BASE_URL}/api/v1/users/change-password`, {
         method: "POST",
         headers: {
           "Content-type": "application/json",

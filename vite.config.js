@@ -10,7 +10,7 @@ export default defineConfig({
   ],
   // server: {
   //   proxy: {
-  //     "/api": "http://13.50.84.146:3000"
+  //     `${BASE_URL}/api": "http://13.50.84.146:3000"
   //   },
   // },
 })

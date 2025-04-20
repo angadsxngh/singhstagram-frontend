@@ -4,6 +4,7 @@ import { useUser } from "../../context/UserContext.jsx";
 import { useNavigate, useLocation } from "react-router-dom";
 
 export default function Card() {
+  const BASE_URL = process.env.BASE_URL
   const navigate = useNavigate();
   const usePost = location.state || { likes: [], comments: [], mediaUrl: "", caption: "" };
   const { user } = useUser();
@@ -14,26 +15,8 @@ export default function Card() {
   const [showDialog, setShowDialog] = useState(false);
   const [commentText, setCommentText] = useState("");
 
-  // const handleComment = async () => {
-  //   if (!commentText.trim()) return;
-    
-  //   const response = await fetch(`/api/v1/users/posts/add-comment/${usePost.id}`, {
-  //     method: "POST",
-  //     headers: { "Content-type": "application/json" },
-  //     body: JSON.stringify({ text: commentText }),
-  //     credentials: "include",
-  //   });
-
-  //   if (response.ok) {
-  //     const res = await response.json();
-  //     setPost(...post, );
-  //     setCommentText("");
-  //     setShowDialog(false);
-  //   }
-  // };
-
   const handleLike = async () => {
-    const response = await fetch("/api/v1/users/likePost", {
+    const response = await fetch(`${BASE_URL}/api/v1/users/likePost`, {
       method: "POST",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify({ postid: usePost.id }),
@@ -49,7 +32,7 @@ export default function Card() {
 
   async function handleDelete() {
     if (!usePost.id) return;
-    const response = await fetch("/api/v1/users/delete-post", {
+    const response = await fetch(`${BASE_URL}/api/v1/users/delete-post`, {
       method: "DELETE",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify({ postid: usePost.id }),

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function UpdateName() {
+  const BASE_URL = process.env.BASE_URL
   const navigate = useNavigate();
   const [form, setForm] = useState({
     name: "",
@@ -19,9 +20,10 @@ export default function UpdateName() {
       alert("Name cannot be empty!");
       return;
     }
+    
 
     try {
-      const response = await fetch("/api/v1/users/update-details", {
+      const response = await fetch(`${BASE_URL}/api/v1/users/update-details`, {
         method: "POST",
         headers: {
           "Content-type": "application/json",

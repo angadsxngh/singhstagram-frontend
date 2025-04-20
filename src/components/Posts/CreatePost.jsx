@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useUser } from "../../context/UserContext.jsx";
 
 export default function CreatePost() {
+  const BASE_URL = process.env.BASE_URL
   const { user } = useUser();
   const navigate = useNavigate();
   const [media, setMedia] = useState(null);
@@ -33,7 +34,7 @@ export default function CreatePost() {
     formData.append("media", form.media);
 
     try {
-      const response = await fetch("/api/v1/users/create-post", {
+      const response = await fetch(`${BASE_URL}/api/v1/users/create-post`, {
         method: "POST",
         body: formData,
       });

@@ -3,6 +3,7 @@ import { FaHeart } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
 const Feed = () => {
+  const BASE_URL = process.env.BASE_URL
   const navigate = useNavigate();
   const defaultAvatar =
     "https://cdn-icons-png.flaticon.com/512/3177/3177440.png";
@@ -12,7 +13,7 @@ const Feed = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await fetch("/api/v1/users/feed", {
+        const response = await fetch(`${BASE_URL}/api/v1/users/feed`, {
           method: "GET",
           credentials: "include",
         });
@@ -32,7 +33,7 @@ const Feed = () => {
 
   const handleLike = async (postId) => {
     try {
-      const response = await fetch("/api/v1/users/likePost", {
+      const response = await fetch(`${BASE_URL}/api/v1/users/likePost`, {
         method: "POST",
         headers: { "Content-type": "application/json" },
         body: JSON.stringify({ postid: postId }),
