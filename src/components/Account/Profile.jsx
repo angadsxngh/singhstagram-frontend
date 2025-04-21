@@ -19,7 +19,6 @@ export default function Profile() {
 
   const handleClick = async () => {
     const BASE_URL = import.meta.env.VITE_API_BASE_URL
-    console.log("button clicked");
 
     const response = await fetch(`${BASE_URL}/api/v1/users/follow/${params.userid}`, {
       method: "POST",
