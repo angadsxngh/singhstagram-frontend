@@ -1,13 +1,13 @@
 import React, { useState, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Trash2 } from "lucide-react"; // Importing Trash Can Icon
-import { useUser } from "../../context/UserContext"; 
-import ToasterUi from 'toaster-ui'
+import { useUser } from "../../context/UserContext";
+import ToasterUi from "toaster-ui";
 export default function Signup() {
-  const BASE_URL = import.meta.env.VITE_API_BASE_URL
-  const toaster = new ToasterUi()
-  const { setUser } = useUser()
-  const navigate = useNavigate()
+  const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+  const toaster = new ToasterUi();
+  const { setUser } = useUser();
+  const navigate = useNavigate();
   const [pfp, setPfp] = useState(null);
   const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({
@@ -18,8 +18,9 @@ export default function Signup() {
     password: "",
     pfp: null,
   });
+  const [isLoading, setIsLoading] = useState(false);
 
-  const fileInputRef = useRef(null); // Ref for file input 
+  const fileInputRef = useRef(null); // Ref for file input
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -42,7 +43,8 @@ export default function Signup() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true)
+    setIsLoading(true);
+    setLoading(true);
     console.log("User Data:", form);
 
     const formData = new FormData();
@@ -57,39 +59,49 @@ export default function Signup() {
       const response = await fetch(`${BASE_URL}/api/v1/users/register`, {
         method: "POST",
         body: formData,
-        credentials: "include"
+        credentials: "include",
       });
-      console.log(response)
+      console.log(response);
 
-      if(response.ok){
+      if (response.ok) {
         const data = await response.json();
-        console.log("Account created: ", data)
+        console.log("Account created: ", data);
 
-        if(data){
-          setUser(data)
-          const toast = toaster.addToast("Account registered successfully", "success")
-          navigate('/Posts')
-        } else{
-          console.log("user data is missing from response")
-          const toast = toaster.addToast("User with email or username already exists", "error")
+        if (data) {
+          setUser(data);
+          const toast = toaster.addToast(
+            "Account registered successfully",
+            "success"
+          );
+          navigate("/Posts");
+        } else {
+          console.log("user data is missing from response");
+          const toast = toaster.addToast(
+            "User with email or username already exists",
+            "error"
+          );
         }
       } else {
-        toaster.addToast("Invalid username or password", "error")
+        toaster.addToast("User with email or username already exists", "error");
         console.error("Login failed:", res.status);
       }
     } catch (error) {
-      // const toast = toaster.addToast("User with email or username already exists", "error")
       console.error("error creating account:", error);
-    } finally{
-      setLoading(false)
+    } finally {
+      setIsLoading(false);
+      setLoading(false);
     }
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-black text-white">
       <div className="w-full max-w-md bg-[#111] p-8 rounded-lg shadow-lg">
-        <h2 className="text-3xl font-bold text-blue-400 text-center">Create an Account</h2>
-        <p className="text-gray-400 text-center mt-2">Join our community and start connecting!</p>
+        <h2 className="text-3xl font-bold text-blue-400 text-center">
+          Create an Account
+        </h2>
+        <p className="text-gray-400 text-center mt-2">
+          Join our community and start connecting!
+        </p>
 
         <form onSubmit={handleSubmit} className="mt-6 space-y-4">
           <input
@@ -159,9 +171,7 @@ export default function Signup() {
                   type="button"
                   onClick={handleDeleteFile}
                   className="bg-red-500 p-2 rounded-lg hover:bg-red-600 transition-all"
-                >
-                  <Trash2 className="text-white w-5 h-5" /> {/* White Trash Icon */}
-                </button>
+                ></button>
               )}
             </div>
           </div>
@@ -170,7 +180,13 @@ export default function Signup() {
             type="submit"
             className="w-full bg-blue-400 text-black font-semibold p-3 rounded-lg hover:bg-blue-500 transition-all"
           >
-            Sign Up
+            {isLoading ? (
+              <div className="flex justify-center items-center gap-2">
+                <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+              </div>
+            ) : (
+              "Sign up"
+            )}
           </button>
         </form>
 
