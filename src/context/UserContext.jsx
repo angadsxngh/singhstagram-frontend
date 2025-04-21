@@ -17,7 +17,6 @@ export const UserProvider = ({ children }) => {
     };
 
     const fetchUser = async () => {
-        setGlobalLoading(true);  
         try {
             const response = await fetch(`${BASE_URL}/api/v1/users/get-user`, {
                 method: "GET",
@@ -36,9 +35,7 @@ export const UserProvider = ({ children }) => {
         } catch (error) {
             setUser(null);
             localStorage.removeItem("user");
-        } finally {
-            setGlobalLoading(false); 
-        }
+        } 
     };
 
     const fetchPosts = async () => {
